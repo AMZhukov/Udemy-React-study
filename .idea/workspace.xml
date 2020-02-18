@@ -38,6 +38,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -71,7 +72,7 @@
       <workItem from="1581614775672" duration="18712000" />
       <workItem from="1581657685588" duration="57692000" />
       <workItem from="1581917960638" duration="1364000" />
-      <workItem from="1581924319372" duration="17412000" />
+      <workItem from="1581924319372" duration="23213000" />
     </task>
     <servers />
   </component>
