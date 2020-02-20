@@ -11,59 +11,67 @@ class App extends Component {
       {name: 'Mazda', year: 2010},
     ],
     pageTitle: 'React components',
+    showCars: false,
 };
 
-  changeTitleHandler = (newTitle) => {
-
+  toggleCarsHandler = () => {
     this.setState({
-      pageTitle: newTitle,
+      showCars: !this.state.showCars,
     })
   };
 
-  hangleInput = (event) => {
+  onChangeName(name, index) {
+    const car = this.state.cars[index];
+    car.name = name;
+    // const cars = this.state.cars.concar(); // Используя ES5
+    const cars = [...this.state.cars]; // Используя ES6, Spread оператор
+    cars.index = car;
     this.setState({
-          pageTitle: event.target.value
-        }
-    )
-  };
+      // cars: cars,
+    cars // тут достаточно так, потому-что совпадают ключ и значения
+    })
+  }
+
+  deleteHandler (index) {
+    const cars = this.state.cars.concat();
+    cars.splice(index, 1);
+    this.setState({cars})
+  }
 
   render() {
     const divStyle = {
       textAlign: 'center',
     };
 
+    let cars = null;
+    if  (this.state.showCars) {
+      cars = this.state.cars.map((car, index) => {
+        return (
+            <div style={{
+              width: '400px',
+              margin: 'auto',
+              paddingTop: '20px',
+              boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.14)',
+              borderRadius: '5px',
+              border: '1px solid black',
+            }}>
+              <Car
+                  key={index}
+                  name={car.name}
+                  year={car.year}
+                  onDelete={this.deleteHandler.bind(this, index)}
+                  onChangeName={(event) => this.onChangeName(event.target.value, index)}
+              />
+            </div>
+        )
+      })
+    }
 
     return (
         <div style={divStyle}>
           <h1>{this.state.pageTitle}</h1>
-          <input type="text" onChange={this.hangleInput}/>
-          <button onClick={this.changeTitleHandler.bind(this, 'changed')}>Change title</button>
-
-          { this.state.cars.map((car, index) => {
-            return (
-                <Car
-                    key={index}
-                    name={car.name}
-                    year={car.year}
-                    onChangeTitle={() => this.changeTitleHandler(car.name)}
-                />
-            )
-          }) }
-
-          {/*<Car*/}
-          {/*    name={cars[0].name}*/}
-          {/*    year={cars[0].year}*/}
-          {/*    onChangeTitle={this.changeTitleHandler.bind(this, cars[0].name)}/> */}
-          {/*<Car*/}
-          {/*    name={cars[1].name}*/}
-          {/*    year={cars[1].year}*/}
-          {/*    onChangeTitle={() => this.changeTitleHandler(cars[1].name)} */}
-          {/*/>*/}
-          {/*<Car*/}
-          {/*    name={cars[2].name}*/}
-          {/*    year={cars[2].year}*/}
-          {/*    onChangeTitle={() => this.changeTitleHandler(cars[2].name)}*/}
-          {/*/>*/}
+          <button onClick={this.toggleCarsHandler}>Toggle cars</button>
+          { cars }
         </div>
     );
   }
