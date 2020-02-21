@@ -3,16 +3,18 @@ import './App.css';
 import Car from './App/Car';
 
 class App extends Component {
-
-  state = {
-    cars: [
-      {name: 'Ford', year: 2018},
-      {name: 'Audi', year: 2016},
-      {name: 'Mazda', year: 2010},
-    ],
-    pageTitle: 'React components',
-    showCars: false,
-};
+    constructor (props){
+        super(props);
+        this.state = {
+            cars: [
+                {name: 'Ford', year: 2018},
+                {name: 'Audi', year: 2016},
+                {name: 'Mazda', year: 2010},
+            ],
+            pageTitle: 'React components',
+            showCars: false,
+        };
+    }
 
   toggleCarsHandler = () => {
     this.setState({
@@ -38,8 +40,17 @@ class App extends Component {
     this.setState({cars})
   }
 
-  render() {
-    const divStyle = {
+  componentWillMount() {
+      console.log('App. Component will mount');
+  }
+
+  componentDidMount() {
+      console.log('App. Component did mount');
+  }
+
+    render() {
+        console.log('App. Render');
+        const divStyle = {
       textAlign: 'center',
     };
 
@@ -69,7 +80,8 @@ class App extends Component {
 
     return (
         <div style={divStyle}>
-          <h1>{this.state.pageTitle}</h1>
+          {/*<h1>{this.state.pageTitle}</h1>*/}
+            <h1> {this.props.title} </h1>
           <button onClick={this.toggleCarsHandler}>Toggle cars</button>
           { cars }
         </div>
